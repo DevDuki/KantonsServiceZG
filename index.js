@@ -6,15 +6,96 @@ const app = express()
 
 
 // Für Kantonsservice?
-app.get('/ZG?dateFrom=yyyy-mm-dd&dateUntil=yyyy-mm-dd', (request, response) => {
+app.get('/incidences', async (request, response) => {
+
   const ZGDataForOtherStudents = {}
-  fetch('api/from/covidPage')
-    .then((response) => response.json())
-    .then((data) => {
-      // do something with data that fits the needs for other students
-      // example: ZGDataForOtherStudents.gemeinden = data.gemeinden
-      // etc...
-    })
+
+  const covidResponse = await fetch('/covid/api')
+  const data = await covidResponse.json()
+
+  /*
+  [
+    {
+       "bfsNr":     4001, 
+       "date":      "2021-02-01",
+       "incidence": 17.5  
+    },
+  ]
+  */
+  
+  // After ZGDataForOtherStudents has been fileld with necessary data
+  response.json(ZGDataForOtherStudents)
+})
+
+
+app.get('incidences/:bfsNr/', async (request, response) => {
+  const bfs = request.params //?
+
+  const ZGDataForOtherStudents = {}
+
+  const covidResponse = await fetch('/covid/api')
+  const data = await covidResponse.json()
+
+  /*
+  [
+    { 
+      "bfsNr":     4001, 
+      "date":      "2021-02-01",  
+      "incidence": 17.5 
+    },  
+  ]
+  */
+  
+  // After ZGDataForOtherStudents has been fileld with necessary data
+  response.json(ZGDataForOtherStudents)
+})
+
+
+app.get('municipalities/', async (request, response) => {
+
+  const ZGDataForOtherStudents = {}
+
+  const covidResponse = await fetch('/covid/api')
+  const data = await covidResponse.json()
+
+  /*
+  [
+    {
+       "bfsNr":      4001, 
+       "zipCode":    5000,  
+       "name":      "Aarau",  
+       "canton":     "AG", 
+       "area":       12.34, 
+       "population": 21473 
+    },  
+  ]
+  */
+  
+  // After ZGDataForOtherStudents has been fileld with necessary data
+  response.json(ZGDataForOtherStudents)
+})
+
+
+app.get('municipalities/:bfsNr/', async (request, response) => {
+  const bfs = request.params //?
+
+  const ZGDataForOtherStudents = {}
+
+  const covidResponse = await fetch('/covid/api')
+  const data = await covidResponse.json()
+
+  /*
+  [
+    {
+       "bfsNr":      4001,
+       "zipCode":    5000,  
+       "name":      "Aarau",  
+       "canton":     "AG", 
+       "area":       12.34, 
+       "population": 21473 
+    },  
+  ]
+  */
   
   // After ZGDataForOtherStudents has been fileld with necessary data
   response.json(ZGDataForOtherStudents)
