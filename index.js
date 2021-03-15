@@ -1,17 +1,28 @@
 const express = require("express")
+const fetch = require("node-fetch")
+require('express-async-errors')
+//const geoRegion = require('./COVID19Cases_geoRegion')
 
-const PORT = process.env.PORT || 3001
+const PORT = 3001
 
 const app = express()
 
-
 // Für Kantonsservice?
-app.get('/incidences', async (request, response) => {
+app.get('/', async (request, response) => {
 
-  const ZGDataForOtherStudents = {}
-
-  const covidResponse = await fetch('/covid/api')
+ 
+  //const covidResponse = await fetch('https://covid19-rest.herokuapp.com/api/openzh/v1/country/CH/area/ZG')
+  const covidResponse = await fetch('https://www.covid19.admin.ch/de/overview#/definitions/DailyIncomingData/properties/geoRegion/ZG')
   const data = await covidResponse.json()
+
+  
+  console.log('response', data)
+
+  // const ZGDataForOtherStudents = {...data}
+  // console.log(data)
+  // response.json(ZGDataForOtherStudents)
+
+  
 
   /*
   [
@@ -21,10 +32,7 @@ app.get('/incidences', async (request, response) => {
        "incidence": 17.5  
     },
   ]
-  */
-  
-  // After ZGDataForOtherStudents has been fileld with necessary data
-  response.json(ZGDataForOtherStudents)
+  */  
 })
 
 
