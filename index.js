@@ -107,18 +107,18 @@ app.get('/incidences/:bfsNr', async (request, response) => {
 
 
 app.get('/municipalities', async (request, response) => {
-  const responseData = mainData.map(data => {
+  const responseData = municipalities.map(municipality => {
     return {
       canton: 'ZG',
-      bfsNr: data.bfsNr,
-      zipCode: data.zipCode,
-      name: data.municipality,
-      area: data.area,
-      population: data.population
+      bfsNr: municipality.bfsNr,
+      zipCode: municipality.zipCode,
+      name: municipality.Municipality,
+      area: municipality.area,
+      population: municipality.Citizens
     }
   })
 
-  response.json(responseData[0])
+  response.json(responseData)
 
   /*
   [
@@ -138,18 +138,20 @@ app.get('/municipalities', async (request, response) => {
 app.get('/municipalities/:bfsNr', async (request, response) => {
   const bfs = parseInt(request.params.bfsNr)
 
-  const responseData = mainData.filter(data => data.bfsNr === bfs).map(data => {
-    return {
-      canton: 'ZG',
-      bfsNr: data.bfsNr,
-      zipCode: data.zipCode,
-      name: data.municipality,
-      area: data.area,
-      population: data.population
-    }
-  })
+  const responseData = municipalities
+    .filter(municipality => municipality.bfsNr === bfs)
+    .map(municipality => {
+      return {
+        canton: 'ZG',
+        bfsNr: municipality.bfsNr,
+        zipCode: municipality.zipCode,
+        name: municipality.Municipality,
+        area: municipality.area,
+        population: municipality.Citizens
+      }
+    })
 
-  response.json(responseData[0])
+  response.json(responseData)
   /*
   [
     {
