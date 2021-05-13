@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const caseSchema = new mongoose.Schema({
   municipality: String,
   date: Date,
