@@ -27,7 +27,7 @@ refreshRouter.get('/', async (request, response) => {
           totalCases14Days += (data.records[index - i].ncumul_conf - data.records[index - i - 1].ncumul_conf) * mun.ratio
         }
       }
-      const incidence = totalCases14Days / mun.population * 100_000
+      const incidence = totalCases14Days / mun.population * 100000
 
 
       const casesPerDay = new Case({
