@@ -21,8 +21,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
 
 
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json())
 app.use('/incidences', incidencesRouter)
 app.use('/municipalities', municipalityRouter)
 app.use('/', refreshRouter)

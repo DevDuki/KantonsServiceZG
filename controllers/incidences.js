@@ -24,7 +24,7 @@ incidencesRouter.get('/', async (request, response) => {
         return {
           'bfsNr': res.bfsNr,
           'date': res.date.toISOString().substring(0, 10),
-          'incidence': res.incidence
+          'incidence': res.incidence === null ? 0 : res.incidence
         }
       })
 
@@ -61,7 +61,7 @@ incidencesRouter.get('/:bfsNr', async (request, response) => {
         return {
           'bfsNr': res.bfsNr,
           'date': res.date.toISOString().substring(0, 10),
-          'incidence': res.incidence
+          'incidence': res.incidence === null ? 0 : res.incidence
         }
       })
 
