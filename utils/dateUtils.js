@@ -10,7 +10,7 @@ const getDatesBetweenDates = (startDate, endDate) => {
 }
 
 const checkDateQuery = (startDate, endDate, response) => {
-  if (!startDate && !endDate) response.status(400).json({ error: 'Ungültiger Filter' })
+  if (!startDate && !endDate) { startDate = '2020-02-29'; endDate = new Date()}
   if (!startDate && endDate) startDate = '2020-02-29'
   if (!endDate && startDate) endDate = new Date();
   const dateFrom = new Date(startDate);
