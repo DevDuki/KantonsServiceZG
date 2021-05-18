@@ -6,7 +6,17 @@ const Municipality = require('../models/municipality')
 
 municipalityRouter.get('/', async (request, response) => {
   const result = await Municipality.find({})
-  response.status(200).json(result)
+  console.log(result)
+  const responseObj = result.map(res => {
+    return {
+      bfsNr: res.bfsNr,
+      name: res.municipality,
+      canton: 'ZG',
+      area: res.area,
+      population: res.population
+    }
+  })
+  response.status(200).json(responseObj)
 })
 
 
@@ -18,9 +28,16 @@ municipalityRouter.get('/:bfsNr', async (request, response) => {
   }
 
   const result = await Municipality.find({ bfsNr: bfs })
-  response.status(200).json(result)
-})
-
-
+  const responseObj = result.map(res => {
+    return {
+      bfsNr: res.bfsNr,
+      name: res.municipality,
+      canton: 'ZG',
+      area: res.area,
+      population: res.population
+    }
+  })
+  response.status(200).json(responseObj)
+}) 
 
 module.exports = municipalityRouter
