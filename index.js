@@ -1,7 +1,12 @@
-const app = require('./app')
+const { httpServer, httpsServer } = require('./app')
 
-const PORT = 3001
+const PORThttp = 3001
+const PORThttps = 3002
 
-app.listen(PORT, () => {
+httpServer.listen(PORThttp, () => {
+  console.log(`Server listening on ${PORT}`)
+})
+
+httpsServer.listen(PORThttps, () => {
   console.log(`Server listening on ${PORT}`)
 })

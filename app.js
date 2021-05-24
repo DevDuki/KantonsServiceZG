@@ -5,6 +5,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const fs = require('fs')
 const https = require('https')
+const http = require('http')
 
 const municipalityRouter = require('./controllers/municipalities')
 const incidencesRouter = require('./controllers/incidences')
@@ -27,10 +28,12 @@ app.use('/incidences', incidencesRouter)
 app.use('/municipalities', municipalityRouter)
 app.use('/', refreshRouter)
 
+const httpServer = http.createServer(app)
+
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/apache2/ssl/certificate_zg.pem'),
   cert: fs.readFileSync('/etc/apache2/ssl/key.pem'),
   passphrase: 'test33test'
 }, app)
 
-module.exports = httpsServer
+module.exports = { httpsServer, httpServer }
