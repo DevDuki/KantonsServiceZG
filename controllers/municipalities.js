@@ -1,5 +1,4 @@
 const municipalityRouter = require('express').Router()
-const fetch = require("node-fetch")
 require('express-async-errors')
 const Municipality = require('../models/municipality')
 
